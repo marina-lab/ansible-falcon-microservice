@@ -1,0 +1,21 @@
+# Falcon Microservice Exmaple
+ - name: pull falcon-microservice image
+   docker_pull:
+     repo: "{{ falcon_microservice_image }}"
+
+ - name: template falcon-microservice.service
+   template:
+     src: falcon-microservice.service
+     dest: /usr/lib/systemd/system/falcon-microservice.service
+   register: falcon_unit
+   notify: restart falcon-microservice
+
+ - name: systemctl daemon-reload
+   command: /bin/systemctl daemon-reload
+   when: falcon_unit.changed
+
+ - name: enable and start falcon-microservice.service
+   service:
+     name: falcon-microservice
+     enabled: yes
+     state: started

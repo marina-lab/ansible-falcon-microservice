@@ -1,0 +1,21 @@
+[Unit]
+Description=Falcon Microservice
+After=thingsdb.service
+Requires=thingsdb.service
+
+[Service]
+Restart=on-failure
+
+ExecStart=/bin/bash -c \
+    "/bin/docker start -a falcon-microservice \
+    || /bin/docker run \
+    --name falcon-microservice \
+    -p {{ private_ip }}:8080:8080 \
+    {{ falcon_microservice_image }}
+
+ExecStop=/bin/bash -c \
+    "/bin/docker stop falcon-microservice \
+    && /bin/docker rm falcon-microservice"
+
+[Install]
+WantedBy=multi-user.target

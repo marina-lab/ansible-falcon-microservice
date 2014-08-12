@@ -1,0 +1,4 @@
+ - name: restart falcon-microservice
+   service:
+     name: falcon-microservice
+     state: restarted

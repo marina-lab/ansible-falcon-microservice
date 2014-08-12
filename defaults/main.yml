@@ -1,0 +1,4 @@
+---
+
+falcon_microservice_image: marina/falcon-microservice:0.1.0
+private_ip: 127.0.0.1
