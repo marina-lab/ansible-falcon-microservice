@@ -6,6 +6,8 @@
      body: "{{ item.value}}"
    with_dict:
      DATABASE_URL: "{{ falcon_microservice_database_url }}"
+     GEVENT_WORKERS: "{{ gevent_workers }}"
+     UWSGI_MASTER: "{{ uwsgi_master }}"
 
  - name: pull falcon-microservice image
    docker_pull:
