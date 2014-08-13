@@ -1,10 +1,7 @@
-====================================
 Ansible Role for Falcon Microservice
 ====================================
 
-Ansible role for deploying the example `Falcon microservice app`_.
+Ansible role for deploying the example
+[Falcon microservice app](https://github.com/marina-lab/falcon-microservice).
 
-.. _Falcon microservice: https://github.com/marina-lab/falcon-microservice
-
-Also deploys a Postgres container with dummy data for the service to
-query.
+Depends on the deployment of a Postgres container with a `things` table.
