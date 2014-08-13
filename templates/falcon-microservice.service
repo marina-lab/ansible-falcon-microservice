@@ -6,10 +6,16 @@ Requires=thingsdb.service
 [Service]
 Restart=on-failure
 
+# Use envconsul to create env-file with docker-reg env vars
+ExecStartPre=/bin/sh -c "/usr/bin/env -i \
+    /bin/envconsul -addr=consul-http.service.consul:8500 falcon-microservice \
+    /usr/bin/env > /tmp/falcon-microservice.env"
+
 ExecStart=/bin/bash -c \
     "/bin/docker start -a falcon-microservice \
     || /bin/docker run \
     --name falcon-microservice \
+    --env-file /tmp/falcon-microservice.env \
     -p {{ private_ip }}:8080:8080 \
     {{ falcon_microservice_image }}
 

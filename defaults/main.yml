@@ -2,3 +2,4 @@
 
 falcon_microservice_image: marina/falcon-microservice:0.1.0
 private_ip: "{{ ansible_eth1.ipv4.address }}"
+falcon_microservice_database_url: "postgres://postgres@{{ private_ip}}:5432/thingsdb"

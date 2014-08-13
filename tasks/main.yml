@@ -1,4 +1,12 @@
 # Falcon Microservice Exmaple
+ - name: set service environment vars in Consul
+   uri:
+     url: "http://consul-http.service.consul:8500/v1/kv/falcon-microservice/{{ item.key }}"
+     method: PUT
+     body: "{{ item.value}}"
+   with_dict:
+     DATABASE_URL: "{{ falcon_microservice_database_url }}"
+
  - name: pull falcon-microservice image
    docker_pull:
      repo: "{{ falcon_microservice_image }}"
